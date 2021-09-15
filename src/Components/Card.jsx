@@ -7,7 +7,7 @@ function Card({ weatherData }) {
   return (
     <div id="cardData">
       <p>{date}</p>
-      <p>{weatherData.name}</p>
+      <p>{weatherData.name}, {weatherData.sys.country}</p>
       <p>{weatherData.main.temp} °c</p>
       <p>{weatherData.weather[0].main}</p>
     </div>
