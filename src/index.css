@@ -1,10 +1,221 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 
-body{
-  font-family: 'Poppins', sans-serif;
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --color: #4154f1;
+  --hover-color: #131ece;
+  --font: 1.3rem;
+}
+
+.HomeDiv {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.card {
+  margin-bottom: 50px;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0px 0px 53px -20px var(--color);
+  -webkit-box-shadow: 0px 0px 53px -20px var(--color);
+  -moz-box-shadow: 0px 0px 53px -20px var(--color);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.48);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.cold {
+  transition: 0.2s ease-in-out;
+  background-color: #b8c6db;
+  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+}
+
+.warm {
+  transition: 0.2s ease-in-out;
+  background-color: #f6f0c4;
+  background-image: linear-gradient(315deg, #f6f0c4 0%, #d99ec9 74%);
+}
+
+#cardInput,
+#cardData {
+  padding: 5px;
+}
+
+#cardData p {
+  padding: 5px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: #fff;
+}
+
+input {
+  padding: 5px;
+  width: 90%;
+  font-family: "poppins", sans-serif;
+  margin-right: 5px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+}
+
+button {
+  background-color: var(--color);
+  height: 30px;
+  cursor: pointer;
+  border: none;
+  font-size: var(--font-size-paragraph-sm);
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #fff;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+}
+
+button:hover {
+  transition: 0.2s ease-in-out;
+  background-color: var(--hover-color);
+}
+
+p {
+  font-size: var(--font);
+  color: var(--color);
+  font-weight: 500;
+}
+
+.dynamicImage{
+  width: 200px;
+}
+.spinner {
+  position: absolute;
+  --color: rgb(65, 84, 241);
+  --fade-color: rgb(65 84 241 / 50%);
+  --scale: 1;
+  --x-speed: 1;
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  transform: scale(var(--scale)) rotateZ(0);
+  animation: ps-spin calc(15s / var(--x-speed)) linear infinite;
+}
+
+@keyframes ps-spin {
+  from {
+    transform: scale(var(--scale)) rotateZ(0);
+  }
+  to {
+    transform: scale(var(--scale)) rotateZ(-360deg);
+  }
+}
+
+.spinner span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner span::before,
+.spinner span::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.3);
+  background-color: rgba(var(--color) / 50%);
+  border-radius: 50%;
+  animation: ps-spinner-scale calc(1.2s / var(--x-speed)) linear infinite;
+}
+
+@keyframes ps-spinner-scale {
+  0% {
+    background-color: var(--fade-color);
+    transform: translateY(-50%) scale(0.3);
+  }
+  25% {
+    background-color: var(--color);
+    transform: translateY(-50%) scale(1);
+  }
+  80% {
+    background-color: var(--fade-color);
+    transform: translateY(-50%) scale(0.3);
+  }
+  100% {
+    background-color: var(--fade-color);
+    transform: translateY(-50%) scale(0.3);
+  }
+}
+
+.spinner span::before {
+  left: 0;
+}
+
+.spinner span::after {
+  right: 0;
+}
+
+.spinner span:first-of-type {
+  transform: rotateZ(-45deg);
+}
+
+.spinner span:last-of-type {
+  transform: rotateZ(45deg);
+}
+
+.spinner span:nth-of-type(2) {
+  transform: rotateZ(90deg);
+}
+
+.spinner span:nth-of-type(3)::after {
+  animation-delay: calc(0.15s / var(--x-speed));
+}
+.spinner span:last-of-type::after {
+  animation-delay: calc(0.3s / var(--x-speed));
+}
+.spinner span:nth-of-type(2)::after {
+  animation-delay: calc(0.45s / var(--x-speed));
+}
+.spinner span:first-of-type::before {
+  animation-delay: calc(0.6s / var(--x-speed));
+}
+.spinner span:nth-of-type(3)::before {
+  animation-delay: calc(0.75s / var(--x-speed));
+}
+.spinner span:last-of-type::before {
+  animation-delay: calc(0.9s / var(--x-speed));
+}
+.spinner span:nth-of-type(2)::before {
+  animation-delay: calc(1.05s / var(--x-speed));
 }

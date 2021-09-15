@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import cold from "./assets/cloud.gif";
+import warm from "./assets/sun.gif";
 function App() {
   const [inputData, setInputData] = useState("");
   const [weatherData, setWeatherData] = useState({});
@@ -36,10 +38,45 @@ function App() {
     fetchData();
   };
 
+  function weatherBackground() {
+    if (typeof weatherData.main === "undefined") {
+      return "";
+    }
+    if (weatherData.main.temp < 20) {
+      return "cold";
+    } else {
+      return "warm";
+    }
+  }
+  const dynamicClassname = weatherBackground();
+
+  function weatherImage() {
+    if (typeof weatherData.main === "undefined") {
+      return "";
+    }
+    if (dynamicClassname === "cold") {
+      return cold;
+    } else {
+      return warm;
+    }
+  }
+  const dynamicImageName = weatherImage();
+
   return (
-    <div>
-      <div id="HomeDiv">
-        <div id="card">
+    <>
+      <div className={`HomeDiv ${dynamicClassname}`}>
+        <div>
+          {dynamicClassname === "" ? (
+            ""
+          ) : (
+            <img
+              className="dynamicImage"
+              src={dynamicImageName}
+              alt="Dynamic"
+            />
+          )}
+        </div>
+        <div className="card">
           <div id="cardInput">
             <form onSubmit={submitHandler}>
               <input
@@ -53,23 +90,32 @@ function App() {
               <button onClick={submitHandler}>Go</button>
             </form>
           </div>
+          {loading ? (
+            <span className="spinner">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          ) : (
+            ""
+          )}
           {typeof weatherData.main === "undefined" ? (
             <div id="cardData">
-              {loading ? <p>Loading</p> : ""}
               <p>Search A City</p>
             </div>
           ) : (
             <div id="cardData">
-              <p>City- {weatherData.name}</p>
-              <p>Date- {date}</p>
-              <p>Temprature- {weatherData.main.temp}</p>
-              <p>Weather- {weatherData.weather[0].main}</p>
+              <p>{date}</p>
+              <p>{weatherData.name}</p>
+              <p>{weatherData.main.temp} °c</p>
+              <p>{weatherData.weather[0].main}</p>
             </div>
           )}
         </div>
       </div>
       <ToastContainer />
-    </div>
+    </>
   );
 }
 
